@@ -1,7 +1,7 @@
 $(document).on("ready", function(){
     var htmlzatia="";
     tipo=localStorage.getItem("tipo");
-
+    console.log(tipo);
     if(tipo==1){
         htmlzatia=/*html*/`
             <div class="inputs">
