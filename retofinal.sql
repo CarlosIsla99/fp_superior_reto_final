@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2020 a las 09:14:57
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.11
+-- Tiempo de generación: 18-02-2020 a las 12:47:26
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,6 +30,7 @@ USE `retofinal`;
 -- Estructura de tabla para la tabla `inquilinos`
 --
 
+DROP TABLE IF EXISTS `inquilinos`;
 CREATE TABLE `inquilinos` (
   `id` int(11) NOT NULL,
   `usuario` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
@@ -42,13 +43,18 @@ CREATE TABLE `inquilinos` (
 -- Estructura de tabla para la tabla `local`
 --
 
+DROP TABLE IF EXISTS `local`;
 CREATE TABLE `local` (
   `usuarioVendedor` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `idLocal` int(11) NOT NULL,
   `direccion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `precio` int(11) NOT NULL,
   `cantidadMin` int(11) NOT NULL,
-  `cantidadMax` int(11) NOT NULL
+  `cantidadMax` int(11) NOT NULL,
+  `descripcion` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `imagen1` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `imagen2` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `imagen3` varchar(250) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -57,6 +63,7 @@ CREATE TABLE `local` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `usuario` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `nombre` int(11) NOT NULL,
