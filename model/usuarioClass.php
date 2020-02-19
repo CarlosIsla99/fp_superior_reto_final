@@ -1,41 +1,136 @@
 <?php
 class usuarioClass{
-    protected $id;
+    protected $idUsuario;
+    protected $usuario;
     protected $nombre;
     protected $apellido;
     protected $descripcion;
     protected $contrasenia;
 
-    public function getId(){
-        return $this->id;
+    /**
+     * Get the value of idUsuario
+     */ 
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
     }
 
-    public function getNombre(){
+    /**
+     * Set the value of idUsuario
+     *
+     * @return  self
+     */ 
+    public function setIdUsuario($idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of usuario
+     */ 
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set the value of usuario
+     *
+     * @return  self
+     */ 
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombre
+     */ 
+    public function getNombre()
+    {
         return $this->nombre;
     }
-    public function getApellido(){
+
+    /**
+     * Set the value of nombre
+     *
+     * @return  self
+     */ 
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of apellido
+     */ 
+    public function getApellido()
+    {
         return $this->apellido;
     }
-    public function getDescripcion(){
+
+    /**
+     * Set the value of apellido
+     *
+     * @return  self
+     */ 
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of descripcion
+     */ 
+    public function getDescripcion()
+    {
         return $this->descripcion;
     }
-    public function getContrasenia(){
+
+    /**
+     * Set the value of descripcion
+     *
+     * @return  self
+     */ 
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of contrasenia
+     */ 
+    public function getContrasenia()
+    {
         return $this->contrasenia;
     }
-    public function setId($id){
-        $this->id=$id;
+
+    /**
+     * Set the value of contrasenia
+     *
+     * @return  self
+     */ 
+    public function setContrasenia($contrasenia)
+    {
+        $this->contrasenia = $contrasenia;
+
+        return $this;
     }
-    public function setNombre($nombre){
-        $this->nombre=$nombre;
-    }
-    public function setApellido($apellido){
-        $this->apellido=$apellido;
-    }
-    public function setDescripcion($descripcion){
-        $this->descripcion=$descripcion;
-    }
-    public function setContrasenia($contrasenia){
-        $this->contrasenia=$contrasenia;
+
+    function getObjectVars()
+    {
+        $vars = get_object_vars($this);
+        return  $vars;
     }
 }
 ?>

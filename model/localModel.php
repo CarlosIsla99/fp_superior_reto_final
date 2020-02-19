@@ -1,6 +1,10 @@
 <?php
+
+
 include_once 'connect_data.php';
 include_once 'localClass.php';
+
+
 class localModel extends localClass{
     private $list=array();
     private $link;
@@ -45,5 +49,54 @@ class localModel extends localClass{
         
         return $this->list;
     }
+
+    public function setList()
+    {
+        $this->OpenConnect();
+        $sql="call sp_locales_load()";
+        
+        $result = $this->link->query($sql);
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            $newLocal = new localModel();
+            
+            $newLocal->setIdLocal($row['idLocal']);
+            $newLocal->setIdCasero($row['idCasero']);
+            $newLocal->setDireccion($row['direccion']);
+            $newLocal->setPrecio($row['precio']);
+            $newLocal->setCantidadMin($row['cantidadMin']);
+            $newLocal->setCantidadMax($row['cantidadMax']);
+            $newLocal->setDescripcion($row['descripcion']);
+            $newLocal->setImagen1($row['imagen1']);
+            $newLocal->setImagen2($row['imagen2']);
+            $newLocal->setImagen3($row['imagen3']);
+            
+            // require_once ($_SERVER['DOCUMENT_ROOT']."/ERRONKA4_GRUPO2/model/equipo_categoriaModel.php");
+            
+            // $equipo_categoria = new equipo_categoriaModel();
+            // $equipo_categoria->setIdEquipo($row['idEquipo']);
+            // $equipo_categoria->findCategoria();
+            
+            // $newEquipo->objectCategoria=$equipo_categoria;
+            
+            array_push($this->list, $newLocal);
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+    }
+
+    function getListJsonString() {
+        
+            $arr=array();
+            
+            foreach ($this->list as $object)
+            {
+                $vars = $object->getObjectVars();
+                
+                array_push($arr, $vars);
+            }
+            return json_encode($arr);
+        }
+
 }
 ?>
