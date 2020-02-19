@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2020 a las 09:14:57
+-- Tiempo de generación: 19-02-2020 a las 13:09:59
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -24,13 +24,24 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `retofinal` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `retofinal`;
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `spLogIn`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spLogIn` (IN `pUsuario` VARCHAR(40), IN `pContrasenia` VARCHAR(40))  NO SQL
+SELECT * FROM usuario WHERE usuario=pUsuario AND contrasenia=pcontrasenia$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inquilinos`
+-- Estructura de tabla para la tabla `inquilino`
 --
 
-CREATE TABLE `inquilinos` (
+DROP TABLE IF EXISTS `inquilino`;
+CREATE TABLE `inquilino` (
   `id` int(11) NOT NULL,
   `usuario` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `idLocal` int(11) NOT NULL
@@ -42,8 +53,9 @@ CREATE TABLE `inquilinos` (
 -- Estructura de tabla para la tabla `local`
 --
 
+DROP TABLE IF EXISTS `local`;
 CREATE TABLE `local` (
-  `usuarioVendedor` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `usuario` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `idLocal` int(11) NOT NULL,
   `direccion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `precio` int(11) NOT NULL,
@@ -57,6 +69,7 @@ CREATE TABLE `local` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `usuario` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `nombre` int(11) NOT NULL,
@@ -66,13 +79,20 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`usuario`, `nombre`, `apellido`, `descripcion`, `contrasenia`) VALUES
+('usuario', 0, 0, 'jfldsafdsa', '1234');
+
+--
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `inquilinos`
+-- Indices de la tabla `inquilino`
 --
-ALTER TABLE `inquilinos`
+ALTER TABLE `inquilino`
   ADD PRIMARY KEY (`id`),
   ADD KEY `usuario` (`usuario`),
   ADD KEY `idLocal` (`idLocal`);
@@ -82,7 +102,7 @@ ALTER TABLE `inquilinos`
 --
 ALTER TABLE `local`
   ADD PRIMARY KEY (`idLocal`),
-  ADD KEY `usuarioVendedor` (`usuarioVendedor`);
+  ADD KEY `usuarioVendedor` (`usuario`);
 
 --
 -- Indices de la tabla `usuario`
@@ -95,9 +115,9 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `inquilinos`
+-- AUTO_INCREMENT de la tabla `inquilino`
 --
-ALTER TABLE `inquilinos`
+ALTER TABLE `inquilino`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
