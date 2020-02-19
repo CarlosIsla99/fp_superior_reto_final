@@ -1,5 +1,6 @@
 <?php
-class inquilinoClass{
+class usuarioClass{
+
     protected $id;
     protected $idUsuario;
 

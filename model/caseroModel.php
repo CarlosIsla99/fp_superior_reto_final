@@ -1,6 +1,6 @@
 <?php
 include_once 'connect_data.php';
-include_once 'inquilinoClass.php';
+include_once 'caseroClass.php';
 class localModel extends localClass{
     private $list=array();
     private $link;
