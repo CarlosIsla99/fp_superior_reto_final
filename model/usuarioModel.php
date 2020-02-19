@@ -45,5 +45,22 @@ class usuarioModel extends usuarioClass{
         
         return $this->list;
     }
+
+
+    public function logIn(){
+        $this->OpenConnect();
+        $usuario=$this->getUsuario();
+        $contrasenia=$this->getContraseia();
+        $sql= 'call spLogIn("'.$usuario.'", "'.$contrasenia.'")';
+        $result=$this->link->query($sql);
+        if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $user=new userModel();
+           $user->setContrasenia($row['contrasenia']);
+            $user->setUsuario($row['usuario']);
+            mysqli_free_result($result);
+        }
+        return $row;
+        $this->CloseConnect();
+    }
 }
 ?>

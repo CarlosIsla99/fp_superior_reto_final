@@ -32,6 +32,9 @@ DROP PROCEDURE IF EXISTS `sp_locales_load`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_locales_load` ()  NO SQL
 SELECT *
 FROM local$$
+DROP PROCEDURE IF EXISTS `spLogIn`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spLogIn` (IN `pUsuario` VARCHAR(40), IN `pContrasenia` VARCHAR(40))  NO SQL
+SELECT * FROM usuario WHERE usuario=pUsuario AND contrasenia=pcontrasenia$$
 
 DELIMITER ;
 
