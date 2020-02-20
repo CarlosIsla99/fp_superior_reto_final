@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-02-2020 a las 13:16:15
--- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.1.32
+-- Tiempo de generación: 20-02-2020 a las 12:30:17
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,13 +28,14 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS `spLogIn`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spLogIn` (IN `pUsuario` VARCHAR(40), IN `pContrasenia` VARCHAR(40))  NO SQL
+SELECT * FROM usuario WHERE usuario=pUsuario AND contrasenia=pcontrasenia$$
+
 DROP PROCEDURE IF EXISTS `sp_locales_load`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_locales_load` ()  NO SQL
 SELECT *
 FROM local$$
-DROP PROCEDURE IF EXISTS `spLogIn`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spLogIn` (IN `pUsuario` VARCHAR(40), IN `pContrasenia` VARCHAR(40))  NO SQL
-SELECT * FROM usuario WHERE usuario=pUsuario AND contrasenia=pcontrasenia$$
 
 DELIMITER ;
 
@@ -82,7 +83,8 @@ CREATE TABLE `local` (
 --
 
 INSERT INTO `local` (`idLocal`, `idCasero`, `direccion`, `precio`, `cantidadMin`, `cantidadMax`, `descripcion`, `imagen1`, `imagen2`, `imagen3`) VALUES
-(1, 1, 'Zelaieta Kalea Nº50 A', 600, 1, 4, 'Piso luminoso, amplio y acogedor. Dentro de la biosfera Urdaibai, con la ventaja de amanecer en un entorno de aire fresco y con aproximadamente unos 60m2. ', '', '', '');
+(1, 1, 'Zelaieta Kalea Nº50 A', 600, 1, 4, 'Piso luminoso, amplio y acogedor. Dentro de la biosfera Urdaibai, con la ventaja de amanecer en un entorno de aire fresco y con aproximadamente unos 60m2. ', 'local1_imagen1.jpg', 'local1_imagen2.jpg', 'local1_imagen3.jpg'),
+(2, 1, 'Zurbaran, Bilbao', 800, 1, 5, 'Magnifica vivienda, distribuida en tres habitaciones, o dos y vestidor, salón, cocina equipada, exterior total, calefacción de gas, orientación sur, vistas. Se requiere solvencia demostrable. Linea de bus y de metro.', 'local2_imagne1.jpg', 'local2_imagne2.jpg', 'local2_imagne3.jpg');
 
 -- --------------------------------------------------------
 
@@ -167,7 +169,7 @@ ALTER TABLE `casero`
 -- AUTO_INCREMENT de la tabla `local`
 --
 ALTER TABLE `local`
-  MODIFY `idLocal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idLocal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pisosfavs`

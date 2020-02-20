@@ -1,4 +1,16 @@
+body{
+    padding-bottom: 300px;
+    background-image: linear-gradient(black, white);
+}
+
 #logearse{
     background-color: #f8f9fa;
     border: none;
+}
+
+#descripcion{
+        width: 90%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
 }
