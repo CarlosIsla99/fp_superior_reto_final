@@ -50,16 +50,35 @@ class usuarioModel extends usuarioClass{
     public function logIn(){
         $this->OpenConnect();
         $usuario=$this->getUsuario();
-        $contrasenia=$this->getContraseia();
+        $contrasenia=$this->getContrasenia();
         $sql= 'call spLogIn("'.$usuario.'", "'.$contrasenia.'")';
         $result=$this->link->query($sql);
         if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-            $user=new userModel();
+            $user=new usuarioModel();
            $user->setContrasenia($row['contrasenia']);
             $user->setUsuario($row['usuario']);
             mysqli_free_result($result);
         }
         return $row;
+        $this->CloseConnect();
+    }
+
+    public function insertUser(){
+        $this->OpenConnect();
+        $usuario=$this->getUsuario();
+        $contrasenia=$this->getContrasenia();
+        $sql='call spLogIn("'.$usuario.'", "'.$contrasenia.'")';
+        if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            return 'Este usuario ya existe';
+            
+        }else{
+            $nombre=$this->getNombre();
+            $apellido=$this->getApellido();
+            $sql = 'call spInsertUser("'.$usuario.'", "'.$contrasenia.'", "'.$nombre.'", "'.$apellido.'")';
+            $result= $this->link->query($sql);
+            return 'Done';
+        }        
+        
         $this->CloseConnect();
     }
 }

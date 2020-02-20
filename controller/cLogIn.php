@@ -1,20 +1,20 @@
 <?php
-include_once '../controller/usuarioModel.php';
+include_once '../model/usuarioModel.php';
 
-$user new usuarioModel;
-$usuario= filter_input(INPUT_GET, "usuario");
-$contrasenia= filter_input(INPUT_GET, "contrasenia");
+$user= new usuarioModel();
+$usuario= filter_input(INPUT_POST, "usuario");
+$contrasenia= filter_input(INPUT_POST, "contrasenia");
 
-$user->setUusario($usuario);
-$user->setContrasenia($contraseenia);
+$user->setUsuario($usuario);
+$user->setContrasenia($contrasenia);
 $usuarioLogeado=$user->LogIn();
 if ($usuarioLogeado==""){
-    $user['error']='Te equivocaste en uno de los campos';
+    $usuarioOBJ['error']='Te equivocaste en uno de los campos';
 }else{
-    $user['usuario']=$usuarioLogeado['usuario'];
-    $user['error']="";
+    $usuarioOBJ['usuario']=$usuarioLogeado['usuario'];
+    $usuarioOBJ['error']="";
     session_start();
     $_SESSION['usuario']=$usuarioLogeado['usuario'];
 }
-echo json_encode($user);
+echo json_encode($usuarioOBJ);
 ?>
