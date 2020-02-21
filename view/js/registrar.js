@@ -8,12 +8,12 @@ $(document).ready(function(){
         descripcion=$("textarea").val();
         $.ajax({
             method: "POST",
-            data:{'usuario':usuario, 'pass':pass1, 'name':name, 'surname':surname},
+            data:{'usuario':usuario, 'pass':pass1, 'name':name, 'surname':surname, 'descripcion': descripcion},
             url: "../controller/cRegistrar.php",
             dataType: "text",
             success: function(result){
                 if(result=="Done"){
-                    location.href= "../index.html";
+                    //location.href= "../index.html";
                 }else{
                     alert(result);
                 }
