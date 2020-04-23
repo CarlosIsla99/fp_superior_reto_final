@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-02-2020 a las 12:30:17
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 23-04-2020 a las 16:15:28
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,14 +28,18 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `spLogIn`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spLogIn` (IN `pUsuario` VARCHAR(40), IN `pContrasenia` VARCHAR(40))  NO SQL
 SELECT * FROM usuario WHERE usuario=pUsuario AND contrasenia=pcontrasenia$$
 
-DROP PROCEDURE IF EXISTS `sp_locales_load`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_locales_load` ()  NO SQL
 SELECT *
 FROM local$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar` (IN `pUsuario` VARCHAR(40), IN `pContrasenia` VARCHAR(40), IN `pNombre` VARCHAR(40), IN `pApellido` VARCHAR(40), IN `pDescripcion` VARCHAR(40))  NO SQL
+INSERT INTO `usuario`(`usuario`, `nombre`, `apellido`, `descripcion`, `contrasenia`) VALUES (pUsuario, pNombre, pApellido, pDescripcion, pContrasenia)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_select_users` ()  NO SQL
+select * from usuario$$
 
 DELIMITER ;
 
@@ -45,7 +49,6 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `casero`
 --
 
-DROP TABLE IF EXISTS `casero`;
 CREATE TABLE `casero` (
   `id` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL
@@ -64,7 +67,6 @@ INSERT INTO `casero` (`id`, `idUsuario`) VALUES
 -- Estructura de tabla para la tabla `local`
 --
 
-DROP TABLE IF EXISTS `local`;
 CREATE TABLE `local` (
   `idLocal` int(11) NOT NULL,
   `idCasero` int(11) NOT NULL,
@@ -92,7 +94,6 @@ INSERT INTO `local` (`idLocal`, `idCasero`, `direccion`, `precio`, `cantidadMin`
 -- Estructura de tabla para la tabla `pisosfavs`
 --
 
-DROP TABLE IF EXISTS `pisosfavs`;
 CREATE TABLE `pisosfavs` (
   `id` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
@@ -105,7 +106,6 @@ CREATE TABLE `pisosfavs` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
   `usuario` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -181,7 +181,7 @@ ALTER TABLE `pisosfavs`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
